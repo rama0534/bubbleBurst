@@ -53,7 +53,29 @@ public class BubbleBurst extends JFrame{
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
-            MakeBubbles(e,  g, mouseClicks );
+            if(gameLevel < 30){
+                statusbarBottom.setText("Easy level");
+                if(mouseClicks.size() < 4){
+                    MakeBubbles(e, g, mouseClicks );
+                }else {
+                    statusbarBottom.setText("Mouse clicks exceeded");
+                }
+
+            }else if(gameLevel < 70){
+                statusbarBottom.setText("Medium level");
+                if(mouseClicks.size() < 5){
+                    MakeBubbles(e, g, mouseClicks );
+                }else {
+                    statusbarBottom.setText("Mouse clicks exceeded");
+                }
+            }else{
+                statusbarBottom.setText("Hard level");
+                if(mouseClicks.size() < 6){
+                    MakeBubbles(e, g, mouseClicks );
+                }else {
+                    statusbarBottom.setText("Mouse clicks exceeded");
+                }
+            }
         }
 
         public void mousePressed(MouseEvent e) {}
