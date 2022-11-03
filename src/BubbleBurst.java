@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Graphics;
-
+import java.util.ArrayList;
 
 
 public class BubbleBurst extends JFrame{
@@ -30,9 +30,8 @@ public class BubbleBurst extends JFrame{
 
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
-        //        private int circle_x, circle_y;
-        Point[] mouseClicks = new Point[500];
-        int count = 0;
+
+        ArrayList<Point> mouseClicks = new ArrayList<>();
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
@@ -40,12 +39,14 @@ public class BubbleBurst extends JFrame{
             if(e.getX() < 50 || e.getY() < 50 || e.getX() > 750 || e.getY() > 750){
                 statusbar.setText("Radius less than 50 please click somewhere else.");
             }else {
-                mouseClicks[count] = new Point(e.getX(), e.getY());
                 g.setColor(Color.green);
                 g.drawOval( e.getX(), e.getY(), 100, 100);
-                mouseClicks[count++] = new Point(e.getX(), e.getY());
-//                System.out.println("Circle x:"+mouseClicks[0].x + " circle Y:"+mouseClicks[0].y);
-//                System.out.println("lane ..."+ mouseClicks[1].x+"...."+ mouseClicks[1].y );
+                mouseClicks.add(new Point(e.getX(), e.getY()));
+
+                System.out.println(mouseClicks.size());
+                for(Point i : mouseClicks){
+                    System.out.println(i.getX() +" "+ i.getY());
+                }
             }
 
         }
