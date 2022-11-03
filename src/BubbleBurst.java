@@ -8,18 +8,20 @@ import java.util.ArrayList;
 public class BubbleBurst extends JFrame{
     private JPanel circlePanel;
     private JLabel statusbar, statusbarBottom;
+    private int gameLevel;
 
 
 
-    public BubbleBurst(){
+    public BubbleBurst(int gl){
         super("Bubble Burst");
+        gameLevel = gl;
 
         circlePanel = new JPanel();
         circlePanel.setBackground(Color.WHITE);
         add(circlePanel, BorderLayout.CENTER);
 
         statusbar = new JLabel(" ");
-        statusbarBottom = new JLabel("Once you draw a circle next mouse click will draw a line if you want new circle restart the application");
+        statusbarBottom = new JLabel(""+gameLevel);
         add(statusbar, BorderLayout.NORTH);
         add(statusbarBottom, BorderLayout.SOUTH);
 
@@ -51,11 +53,7 @@ public class BubbleBurst extends JFrame{
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
-
             MakeBubbles(e,  g, mouseClicks );
-
-
-
         }
 
         public void mousePressed(MouseEvent e) {}

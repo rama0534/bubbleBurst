@@ -71,7 +71,7 @@ public class InitialFrame extends JFrame{
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BubbleBurst bb = new BubbleBurst();
+                BubbleBurst bb = new BubbleBurst(level.getValue());
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
                 bb.setVisible(true);
