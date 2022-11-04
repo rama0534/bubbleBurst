@@ -9,6 +9,7 @@ public class BubbleBurst extends JFrame{
     private JPanel circlePanel;
     private JLabel statusbar, statusbarBottom;
     private int gameLevel;
+    private int count;
 
 
 
@@ -31,17 +32,38 @@ public class BubbleBurst extends JFrame{
     }
 
     public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks ){
-        if(e.getX() < 50 || e.getY() < 50 || e.getX() > 750 || e.getY() > 750){
+        if(e.getX() < 50 || e.getY() < 50 || e.getX() > 700 || e.getY() > 680){
             statusbar.setText("Radius less than 50 please click somewhere else.");
         }else {
-            g.setColor(Color.green);
-            g.drawOval( e.getX(), e.getY(), 100, 100);
-            mouseClicks.add(new Point(e.getX(), e.getY()));
+            System.out.println("Hello "+mouseClicks.size());
+            if(mouseClicks.size() == 0){
+                System.out.println("Size zero");
+                g.setColor(Color.green);
+                g.drawOval( e.getX(), e.getY(), 100, 100);
+                mouseClicks.add(new Point(e.getX(), e.getY()));
 
-            System.out.println(mouseClicks.size());
-            for(Point i : mouseClicks){
-                System.out.println(i.getX() +" "+ i.getY());
             }
+            else {
+                count = 1;
+                for(Point i : mouseClicks){
+
+                    if(Math.abs(e.getX()-i.getX()) > 200 || Math.abs(e.getY()-i.getY()) >200){
+                        System.out.println("Math logic is true");
+                        count = count+1;
+                        System.out.println("called");
+                        System.out.println(count);
+                    }
+                }
+                if(count > mouseClicks.size()){
+                    System.out.println("Size is ,......"+mouseClicks.size());
+                    g.setColor(Color.green);
+                    g.drawOval( e.getX(), e.getY(), 100, 100);
+                    mouseClicks.add(new Point(e.getX(), e.getY()));
+                }
+            }
+        }
+        for(Point i: mouseClicks){
+            System.out.println("X....."+i.getX()+".....Y......."+i.getY());
         }
 
     }
@@ -84,7 +106,7 @@ public class BubbleBurst extends JFrame{
         public void mouseExited(MouseEvent e) {}
         public void mouseDragged(MouseEvent e) {}
         public void mouseMoved(MouseEvent e) {
-            statusbar.setText("Click 50 away from the boarder to make a circle");
+            statusbar.setText("Click 50 away from the boarder and other circle(s) to make a circle");
         }
     }
 
