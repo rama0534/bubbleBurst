@@ -11,6 +11,8 @@ public class BubbleBurst extends JFrame{
     private int gameLevel;
     private int count;
     private int round = 0;
+    double pointLocation;
+    int radius = 50;
 
 
 
@@ -84,7 +86,12 @@ public class BubbleBurst extends JFrame{
                     MakeBubbles(e, g, mouseClicks );
                 }else {
                     statusbarBottom.setText("Mouse clicks exceeded");
-
+                    for(Point i : mouseClicks){
+                        pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
+                        if(pointLocation < radius){
+                            System.out.println("clicked inside the circle");
+                        }
+                    }
                 }
 
             }else if(gameLevel < 70){
