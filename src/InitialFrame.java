@@ -71,6 +71,7 @@ public class InitialFrame extends JFrame{
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog( start,"Click on pannel to form a circle", "Information", JOptionPane.INFORMATION_MESSAGE );
                 BubbleBurst bb = new BubbleBurst(level.getValue());
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
