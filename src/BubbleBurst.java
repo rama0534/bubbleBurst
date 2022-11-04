@@ -6,10 +6,11 @@ import java.util.ArrayList;
 
 
 public class BubbleBurst extends JFrame{
-    private JPanel circlePanel;
+    public JPanel circlePanel;
     private JLabel statusbar, statusbarBottom;
     private int gameLevel;
     private int count;
+    private int round = 0;
 
 
 
@@ -34,6 +35,7 @@ public class BubbleBurst extends JFrame{
     public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks ){
         if(e.getX() < 50 || e.getY() < 50 || e.getX() > 700 || e.getY() > 680){
             statusbar.setText("Radius less than 50 please click somewhere else.");
+            JOptionPane.showMessageDialog( circlePanel,"Click 50 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
         }else {
             System.out.println("Hello "+mouseClicks.size());
             if(mouseClicks.size() == 0){
@@ -47,7 +49,7 @@ public class BubbleBurst extends JFrame{
                 count = 1;
                 for(Point i : mouseClicks){
 
-                    if(Math.abs(e.getX()-i.getX()) > 200 || Math.abs(e.getY()-i.getY()) >200){
+                    if(Math.abs(e.getX()-i.getX()) > 200 + round || Math.abs(e.getY()-i.getY()) >200 + round){
                         System.out.println("Math logic is true");
                         count = count+1;
                         System.out.println("called");
@@ -75,12 +77,14 @@ public class BubbleBurst extends JFrame{
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
+//            JOptionPane.showMessageDialog( circlePanel,"Required bubbles created please click on bubble to burst them ", "Information", JOptionPane.INFORMATION_MESSAGE );
             if(gameLevel < 30){
                 statusbarBottom.setText("Easy level");
                 if(mouseClicks.size() < 4){
                     MakeBubbles(e, g, mouseClicks );
                 }else {
                     statusbarBottom.setText("Mouse clicks exceeded");
+
                 }
 
             }else if(gameLevel < 70){
@@ -106,7 +110,7 @@ public class BubbleBurst extends JFrame{
         public void mouseExited(MouseEvent e) {}
         public void mouseDragged(MouseEvent e) {}
         public void mouseMoved(MouseEvent e) {
-            statusbar.setText("Click 50 away from the boarder and other circle(s) to make a circle");
+            statusbar.setText("Click 50 away from the boarder and existing circle(s) to make a circle");
         }
     }
 
