@@ -12,6 +12,8 @@ public class InitialFrame extends JFrame{
     private JLabel hard;
     private JButton start, restart;
     private JSlider level;
+    private String gameLevel = "";
+    private int numberOfBubbles;
     GridBagConstraints c = new GridBagConstraints();
 
 
@@ -68,10 +70,21 @@ public class InitialFrame extends JFrame{
         c.gridy = 2;
         initialPanel.add(level, c);
 
+        if(level.getValue() < 30){
+            gameLevel = "Easy";
+            numberOfBubbles = 4;
+        }else if(level.getValue() < 70){
+            gameLevel = "Medium";
+            numberOfBubbles = 5;
+        }else{
+            gameLevel = "Hard";
+            numberOfBubbles = 6;
+        }
+
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog( start,"Click on pannel to form a circle", "Information", JOptionPane.INFORMATION_MESSAGE );
+                JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 50 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
                 BubbleBurst bb = new BubbleBurst(level.getValue());
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
