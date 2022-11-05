@@ -39,9 +39,7 @@ public class BubbleBurst extends JFrame{
             statusbar.setText("Radius less than 50 please click somewhere else.");
             JOptionPane.showMessageDialog( circlePanel,"Click 50 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
         }else {
-            System.out.println("Hello "+mouseClicks.size());
             if(mouseClicks.size() == 0){
-                System.out.println("Size zero");
                 g.setColor(Color.green);
                 g.drawOval( e.getX(), e.getY(), 100, 100);
                 mouseClicks.add(new Point(e.getX(), e.getY()));
@@ -54,7 +52,6 @@ public class BubbleBurst extends JFrame{
                     if(Math.abs(e.getX()-i.getX()) > 200 + round || Math.abs(e.getY()-i.getY()) >200 + round){
                         System.out.println("Math logic is true");
                         count = count+1;
-                        System.out.println("called");
                         System.out.println(count);
                     }
                 }
@@ -63,6 +60,9 @@ public class BubbleBurst extends JFrame{
                     g.setColor(Color.green);
                     g.drawOval( e.getX(), e.getY(), 100, 100);
                     mouseClicks.add(new Point(e.getX(), e.getY()));
+                }
+                else {
+                    JOptionPane.showMessageDialog( circlePanel,"Click 50 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
                 }
             }
         }
@@ -73,13 +73,14 @@ public class BubbleBurst extends JFrame{
     }
 
 
+
+
     private class Handlerclass implements MouseListener, MouseMotionListener {
 
         ArrayList<Point> mouseClicks = new ArrayList<>();
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
-//            JOptionPane.showMessageDialog( circlePanel,"Required bubbles created please click on bubble to burst them ", "Information", JOptionPane.INFORMATION_MESSAGE );
             if(gameLevel < 30){
                 statusbarBottom.setText("Easy level");
                 if(mouseClicks.size() < 4){
@@ -87,9 +88,11 @@ public class BubbleBurst extends JFrame{
                 }else {
                     statusbarBottom.setText("Mouse clicks exceeded");
                     for(Point i : mouseClicks){
+                        System.out.println("testing");
                         pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
                         if(pointLocation < radius){
-                            System.out.println("clicked inside the circle");
+                            System.out.println("testing");
+                            System.out.println("clicked inside the bubble"+i.getX()+"......."+i.getY());
                         }
                     }
                 }
