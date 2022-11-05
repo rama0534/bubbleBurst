@@ -50,7 +50,6 @@ public class BubbleBurst extends JFrame{
                 for(Point i : mouseClicks){
 
                     if(Math.abs(e.getX()-i.getX()) > 200 + round || Math.abs(e.getY()-i.getY()) >200 + round){
-                        System.out.println("Math logic is true");
                         count = count+1;
                         System.out.println(count);
                     }
@@ -88,11 +87,10 @@ public class BubbleBurst extends JFrame{
                 }else {
                     statusbarBottom.setText("Mouse clicks exceeded");
                     for(Point i : mouseClicks){
-                        System.out.println("testing");
                         pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
                         if(pointLocation < radius){
-                            System.out.println("testing");
-                            System.out.println("clicked inside the bubble"+i.getX()+"......."+i.getY());
+                            g.setColor(Color.WHITE);
+                            g.drawOval( (int)i.getX(), (int)i.getY(), 100, 100);
                         }
                     }
                 }
