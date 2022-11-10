@@ -6,7 +6,7 @@ import javax.swing.event.ChangeListener;
 
 
 public class InitialFrame extends JFrame{
-    private JPanel initialPanel;
+    private JPanel panel_01;
     private JLabel easy;
     private JLabel medium;
     private JLabel hard;
@@ -18,13 +18,13 @@ public class InitialFrame extends JFrame{
 
 
 
-    public InitialFrame(){
+    public InitialFrame() {
         super("Bubble Burst");
 
-        initialPanel = new JPanel();
-        initialPanel.setLayout(new GridBagLayout());
-        initialPanel.setBackground(Color.WHITE);
-        add(initialPanel);
+        panel_01 = new JPanel();
+        panel_01.setLayout(new GridBagLayout());
+        panel_01.setBackground(Color.WHITE);
+        add(panel_01);
 
         easy = new JLabel("Easy");
         medium = new JLabel("Medium");
@@ -39,12 +39,12 @@ public class InitialFrame extends JFrame{
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 0;
-        initialPanel.add(start, c);
+        panel_01.add(start, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 0;
-        initialPanel.add(restart, c);
+        panel_01.add(restart, c);
 
         //Row two
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -52,15 +52,15 @@ public class InitialFrame extends JFrame{
 
         c.gridx = 0;
         c.gridy = 1;
-        initialPanel.add(easy, c);
+        panel_01.add(easy, c);
 
         c.gridx = 1;
         c.gridy = 1;
-        initialPanel.add(medium, c);
+        panel_01.add(medium, c);
 
         c.gridx = 2;
         c.gridy = 1;
-        initialPanel.add(hard, c);
+        panel_01.add(hard, c);
 
 
         //Row three
@@ -68,29 +68,22 @@ public class InitialFrame extends JFrame{
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 2;
-        initialPanel.add(level, c);
+        panel_01.add(level, c);
 
-        if(level.getValue() < 30){
-            gameLevel = "Easy";
-            numberOfBubbles = 4;
-        }else if(level.getValue() < 70){
-            gameLevel = "Medium";
-            numberOfBubbles = 5;
-        }else{
-            gameLevel = "Hard";
-            numberOfBubbles = 6;
-        }
+
 
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 50 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
+                levelFinder();
+                JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
                 BubbleBurst bb = new BubbleBurst(level.getValue());
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
                 bb.setVisible(true);
             }
         });
+
 
         restart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +97,16 @@ public class InitialFrame extends JFrame{
 
 
     }
-
-
-
+    public void levelFinder(){
+        if(level.getValue() < 30){
+            gameLevel = "Easy";
+            numberOfBubbles = 4;
+        }else if(level.getValue() < 70){
+            gameLevel = "Medium";
+            numberOfBubbles = 5;
+        }else{
+            gameLevel = "Hard";
+            numberOfBubbles = 6;
+        }
+    }
 }
