@@ -8,20 +8,20 @@ import java.util.ArrayList;
 public class BubbleBurst extends JFrame{
     public JPanel circlePanel;
     private JLabel statusbar, statusbarBottom;
-    private int gameLevel;
+    private int numberOfBubbles;
     private int count;
     private int round = 0;
     double pointLocation;
     int diameter = 50;
 
-    public BubbleBurst(int gl){
+    public BubbleBurst(int nOfB, String gameLvel){
         super("Bubble Burst");
-        gameLevel = gl;
+        numberOfBubbles = nOfB;
         circlePanel = new JPanel();
         circlePanel.setBackground(Color.WHITE);
         add(circlePanel, BorderLayout.CENTER);
         statusbar = new JLabel(" ");
-        statusbarBottom = new JLabel(""+gameLevel);
+        statusbarBottom = new JLabel(""+ numberOfBubbles);
         add(statusbar, BorderLayout.NORTH);
         add(statusbarBottom, BorderLayout.SOUTH);
         Handlerclass handler = new Handlerclass();
@@ -73,50 +73,36 @@ public class BubbleBurst extends JFrame{
         }
 
     }
+    public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e){
+        Graphics g = getGraphics();
+        if(mouseClicks.size() < numberOfBubbles){
+            MakeBubbles(e, g, mouseClicks );
+        }else {
+            BurstBubble(  g,  mouseClicks, burstedBubles, e );
+        }
+        if(burstedBubles.size() == numberOfBubbles){
+            JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
+        }
+
+    }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
         ArrayList<Point> mouseClicks = new ArrayList<>();
-        ArrayList<Point> burstedBubles = new ArrayList<>();
+        ArrayList<Point> burstBubbles = new ArrayList<>();
 
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
-            if(gameLevel < 30){
+            if(numberOfBubbles == 4){
                 statusbarBottom.setText("Easy level");
-
-                if(mouseClicks.size() < 4){
-                    MakeBubbles(e, g, mouseClicks );
-                }else {
-                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
-                }
-                if(burstedBubles.size() == 4){
-                    JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
-                }
-
-
-            }else if(gameLevel < 70){
+                Game(mouseClicks, burstBubbles, e);
+            }else if(numberOfBubbles == 5){
 
                 statusbarBottom.setText("Medium level");
-
-                if(mouseClicks.size() < 5){
-                    MakeBubbles(e, g, mouseClicks );
-                }else {
-                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
-                }
-
-                if(burstedBubles.size() == 5){
-                    JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
-                }
+                Game(mouseClicks, burstBubbles, e);
             }else{
                 statusbarBottom.setText("Hard level");
-                if(mouseClicks.size() < 6){
-                    MakeBubbles(e, g, mouseClicks );
-                }else {
-                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
-                }
-                if(burstedBubles.size() == 6){
-                    JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
-                }
+                Game(mouseClicks, burstBubbles, e);
             }
         }
 
