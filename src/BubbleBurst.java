@@ -95,18 +95,27 @@ public class BubbleBurst extends JFrame{
 
 
             }else if(gameLevel < 70){
+
                 statusbarBottom.setText("Medium level");
+
                 if(mouseClicks.size() < 5){
                     MakeBubbles(e, g, mouseClicks );
                 }else {
-                    statusbarBottom.setText("Mouse clicks exceeded");
+                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
+                }
+
+                if(burstedBubles.size() == 5){
+                    JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
                 }
             }else{
                 statusbarBottom.setText("Hard level");
                 if(mouseClicks.size() < 6){
                     MakeBubbles(e, g, mouseClicks );
                 }else {
-                    statusbarBottom.setText("Mouse clicks exceeded");
+                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
+                }
+                if(burstedBubles.size() == 6){
+                    JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
                 }
             }
         }
