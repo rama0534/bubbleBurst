@@ -61,6 +61,19 @@ public class BubbleBurst extends JFrame{
         }
     }
 
+    public void BurstBubble( Graphics g, ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e ){
+        for(Point i : mouseClicks){
+            pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
+            if(pointLocation < diameter/2){
+                burstedBubles.add(new Point((int) i.getX(), (int) i.getY()));
+                g.setColor(Color.WHITE);
+                g.drawOval( i.x-diameter/2, i.y, diameter, diameter);
+                g.fillOval(i.x-diameter/2, i.y, diameter, diameter);
+            }
+        }
+
+    }
+
     private class Handlerclass implements MouseListener, MouseMotionListener {
         ArrayList<Point> mouseClicks = new ArrayList<>();
         ArrayList<Point> burstedBubles = new ArrayList<>();
@@ -74,20 +87,9 @@ public class BubbleBurst extends JFrame{
                 if(mouseClicks.size() < 4){
                     MakeBubbles(e, g, mouseClicks );
                 }else {
-                    for(Point i : mouseClicks){
-                        pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
-                        if(pointLocation < diameter/2){
-                            burstedBubles.add(new Point((int) i.getX(), (int) i.getY()));
-                            System.out.println( burstedBubles.size());
-                            g.setColor(Color.WHITE);
-                            g.drawOval( i.x-diameter/2, i.y, diameter, diameter);
-                            g.fillOval(i.x-diameter/2, i.y, diameter, diameter);
-                        }
-                    }
-
+                    BurstBubble(  g,  mouseClicks, burstedBubles, e );
                 }
                 if(burstedBubles.size() == 4){
-                    System.out.println("Game finish");
                     JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
                 }
 
