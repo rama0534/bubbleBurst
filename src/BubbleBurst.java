@@ -12,43 +12,37 @@ public class BubbleBurst extends JFrame{
     private int count;
     private int round = 0;
     double pointLocation;
-    int radius = 50;
-
-
+    int diameter = 50;
 
     public BubbleBurst(int gl){
         super("Bubble Burst");
         gameLevel = gl;
-
         circlePanel = new JPanel();
         circlePanel.setBackground(Color.WHITE);
         add(circlePanel, BorderLayout.CENTER);
-
         statusbar = new JLabel(" ");
         statusbarBottom = new JLabel(""+gameLevel);
         add(statusbar, BorderLayout.NORTH);
         add(statusbarBottom, BorderLayout.SOUTH);
-
         Handlerclass handler = new Handlerclass();
         circlePanel.addMouseListener(handler);
         circlePanel.addMouseMotionListener((handler));
     }
 
     public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks ){
-        if(e.getX() < 50 || e.getY() < 50 || e.getX() > 700 || e.getY() > 680){
+        if(e.getX() < 20 || e.getY() < 20 || e.getX() > 700 || e.getY() > 680){
             statusbar.setText("Radius less than 50 please click somewhere else.");
             JOptionPane.showMessageDialog( circlePanel,"Click 50 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
         }else {
             if(mouseClicks.size() == 0){
-                g.setColor(Color.green);
-                g.drawOval( e.getX(), e.getY(), 100, 100);
+                g.setColor(Color.blue);
+                g.drawOval( e.getX()-diameter/2, e.getY(), diameter, diameter);
+                g.fillOval(e.getX()-diameter/2, e.getY(), diameter, diameter);
                 mouseClicks.add(new Point(e.getX(), e.getY()));
-
             }
             else {
                 count = 1;
                 for(Point i : mouseClicks){
-
                     if(Math.abs(e.getX()-i.getX()) > 200 + round || Math.abs(e.getY()-i.getY()) >200 + round){
                         count = count+1;
                         System.out.println(count);
@@ -57,7 +51,8 @@ public class BubbleBurst extends JFrame{
                 if(count > mouseClicks.size()){
                     System.out.println("Size is ,......"+mouseClicks.size());
                     g.setColor(Color.green);
-                    g.drawOval( e.getX(), e.getY(), 100, 100);
+                    g.drawOval( e.getX()-diameter/2, e.getY(), diameter, diameter);
+                    g.fillOval(e.getX()-diameter/2, e.getY(), diameter, diameter);
                     mouseClicks.add(new Point(e.getX(), e.getY()));
                 }
                 else {
@@ -68,14 +63,9 @@ public class BubbleBurst extends JFrame{
         for(Point i: mouseClicks){
             System.out.println("X....."+i.getX()+".....Y......."+i.getY());
         }
-
     }
 
-
-
-
     private class Handlerclass implements MouseListener, MouseMotionListener {
-
         ArrayList<Point> mouseClicks = new ArrayList<>();
         public void mouseClicked(MouseEvent e) {
             Graphics g = getGraphics();
@@ -88,9 +78,11 @@ public class BubbleBurst extends JFrame{
                     statusbarBottom.setText("Mouse clicks exceeded");
                     for(Point i : mouseClicks){
                         pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
-                        if(pointLocation < radius){
+                        if(pointLocation < diameter/2){
+                            System.out.println(i);
                             g.setColor(Color.WHITE);
-                            g.drawOval( (int)i.getX(), (int)i.getY(), 100, 100);
+                            g.drawOval( i.x-diameter/2, i.y, diameter, diameter);
+                            g.fillOval(i.x-diameter/2, i.y, diameter, diameter);
                         }
                     }
                 }
