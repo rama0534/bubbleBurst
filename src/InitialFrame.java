@@ -86,6 +86,12 @@ public class InitialFrame extends JFrame{
 
         restart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                levelFinder();
+                JOptionPane.showMessageDialog( restart,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
+                BubbleBurst bb = new BubbleBurst(numberOfBubbles, gameLevel);
+                bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                bb.setSize(800, 800);
+                bb.setVisible(true);
             }
         });
 

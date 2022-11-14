@@ -31,32 +31,6 @@ public class BubbleBurst extends JFrame{
         circlePanel.addMouseMotionListener((handler));
     }
 
-    public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks, int numberOfBubbles ){
-        if(e.getX() < 20 || e.getY() < 20 || e.getX() > 700 || e.getY() > 680){
-            statusbar.setText("Radius less than 25 please click somewhere else.");
-            JOptionPane.showMessageDialog( circlePanel,"Click 25 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
-        }else {
-            if(mouseClicks.size() == 0){
-                Bubble bubble = new Bubble(e.getX(), e.getY(), 50,"#00FF00", g);
-                mouseClicks.add(new Point(e.getX(), e.getY()));
-            }
-            else {
-                count = 1;
-                for(Point i : mouseClicks){
-                    if(Math.abs(e.getX()-i.getX()) > 100 + round || Math.abs(e.getY()-i.getY()) >100 + round){
-                        count = count+1;
-                    }
-                }
-                if(count > mouseClicks.size()){
-                    Bubble bubble = new Bubble(e.getX(), e.getY(), 50,"#00FF00", g);
-                    mouseClicks.add(new Point(e.getX(), e.getY()));
-                }
-                else {
-                    JOptionPane.showMessageDialog( circlePanel,"Click 50 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
-                }
-            }
-        }
-    }
 
     public void BurstBubble( Graphics g, ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e ){
         for(Point i : mouseClicks){
@@ -70,7 +44,8 @@ public class BubbleBurst extends JFrame{
     }
     public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e, Graphics g){
         if(mouseClicks.size() < numberOfBubbles){
-            MakeBubbles(e, g, mouseClicks, numberOfBubbles );
+            MakeBubble makeBubble =  new MakeBubble();
+            makeBubble.MakeBubble(e,  g, mouseClicks, statusbar, circlePanel);
         }else {
             BurstBubble(  g,  mouseClicks, burstedBubles, e );
         }
