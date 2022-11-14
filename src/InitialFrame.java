@@ -13,7 +13,7 @@ public class InitialFrame extends JFrame{
     private JButton start, restart;
     private JSlider level;
     private String gameLevel = "";
-    private int numberOfBubbles;
+    private int numberOfBubbles = 4;
     GridBagConstraints c = new GridBagConstraints();
 
 
@@ -69,12 +69,25 @@ public class InitialFrame extends JFrame{
         c.gridy = 2;
         panel_01.add(level, c);
 
+        level.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                if(level.getValue() < 30){
+                    gameLevel = "Easy";
+                    numberOfBubbles = 4;
+                }else if(level.getValue() < 70){
+                    gameLevel = "Medium";
+                    numberOfBubbles = 5;
+                }else{
+                    gameLevel = "Hard";
+                    numberOfBubbles = 6;
+                }
+            }
+        });
 
 
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                levelFinder();
                 JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
                 SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel);
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +99,6 @@ public class InitialFrame extends JFrame{
 
         restart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                levelFinder();
                 JOptionPane.showMessageDialog( restart,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
                 SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel);
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,23 +107,8 @@ public class InitialFrame extends JFrame{
             }
         });
 
-        level.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-            }
-        });
 
 
-    }
-    public void levelFinder(){
-        if(level.getValue() < 30){
-            gameLevel = "Easy";
-            numberOfBubbles = 4;
-        }else if(level.getValue() < 70){
-            gameLevel = "Medium";
-            numberOfBubbles = 5;
-        }else{
-            gameLevel = "Hard";
-            numberOfBubbles = 6;
-        }
+
     }
 }
