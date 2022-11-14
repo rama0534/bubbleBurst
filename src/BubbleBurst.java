@@ -14,7 +14,9 @@ public class BubbleBurst extends JFrame{
     double pointLocation;
     int diameter = 50;
 
-    public BubbleBurst(int nOfB, String gameLvel){
+
+
+    public BubbleBurst(int nOfB, String gameLevel){
         super("Bubble Burst");
         numberOfBubbles = nOfB;
         circlePanel = new JPanel();
@@ -29,15 +31,13 @@ public class BubbleBurst extends JFrame{
         circlePanel.addMouseMotionListener((handler));
     }
 
-    public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks ){
+    public void MakeBubbles(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks, int numberOfBubbles ){
         if(e.getX() < 20 || e.getY() < 20 || e.getX() > 700 || e.getY() > 680){
             statusbar.setText("Radius less than 25 please click somewhere else.");
             JOptionPane.showMessageDialog( circlePanel,"Click 25 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
         }else {
             if(mouseClicks.size() == 0){
-                g.setColor(Color.green);
-                g.drawOval( e.getX()-diameter/2, e.getY(), diameter, diameter);
-                g.fillOval(e.getX()-diameter/2, e.getY(), diameter, diameter);
+                Bubble bubble = new Bubble(e.getX(), e.getY(), 50,"#00FF00", g);
                 mouseClicks.add(new Point(e.getX(), e.getY()));
             }
             else {
@@ -48,10 +48,7 @@ public class BubbleBurst extends JFrame{
                     }
                 }
                 if(count > mouseClicks.size()){
-                    g.setColor(Color.green);
-                    g.drawOval( e.getX()-diameter/2, e.getY(), diameter, diameter);
-//                    g.drawRect(e.getX()-diameter, e.getY()-diameter/2, diameter*2, diameter*2);
-                    g.fillOval(e.getX()-diameter/2, e.getY(), diameter, diameter);
+                    Bubble bubble = new Bubble(e.getX(), e.getY(), 50,"#00FF00", g);
                     mouseClicks.add(new Point(e.getX(), e.getY()));
                 }
                 else {
@@ -66,17 +63,14 @@ public class BubbleBurst extends JFrame{
             pointLocation = Math.sqrt(Math.pow((i.getX() - e.getX()), 2) + Math.pow((i.getY() - e.getY()), 2));
             if(pointLocation < diameter/2){
                 burstedBubles.add(new Point((int) i.getX(), (int) i.getY()));
-                g.setColor(Color.WHITE);
-                g.drawOval( i.x-diameter/2, i.y, diameter, diameter);
-                g.fillOval(i.x-diameter/2, i.y, diameter, diameter);
+                Bubble bubble = new Bubble(i.x, i.y, 50,"#FFFFFF", g);
             }
         }
 
     }
-    public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e){
-        Graphics g = getGraphics();
+    public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e, Graphics g){
         if(mouseClicks.size() < numberOfBubbles){
-            MakeBubbles(e, g, mouseClicks );
+            MakeBubbles(e, g, mouseClicks, numberOfBubbles );
         }else {
             BurstBubble(  g,  mouseClicks, burstedBubles, e );
         }
@@ -88,6 +82,7 @@ public class BubbleBurst extends JFrame{
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
         ArrayList<Point> mouseClicks = new ArrayList<>();
+
         ArrayList<Point> burstBubbles = new ArrayList<>();
 
         public void mouseClicked(MouseEvent e) {
@@ -95,14 +90,13 @@ public class BubbleBurst extends JFrame{
             statusbar.setText(String.format("Clicked at %d, %d", e.getX(), e.getY()));
             if(numberOfBubbles == 4){
                 statusbarBottom.setText("Easy level");
-                Game(mouseClicks, burstBubbles, e);
+                Game(mouseClicks, burstBubbles, e, g);
             }else if(numberOfBubbles == 5){
-
                 statusbarBottom.setText("Medium level");
-                Game(mouseClicks, burstBubbles, e);
+                Game(mouseClicks, burstBubbles, e, g);
             }else{
                 statusbarBottom.setText("Hard level");
-                Game(mouseClicks, burstBubbles, e);
+                Game(mouseClicks, burstBubbles, e, g);
             }
         }
 

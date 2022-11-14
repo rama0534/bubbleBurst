@@ -20,7 +20,6 @@ public class InitialFrame extends JFrame{
 
     public InitialFrame() {
         super("Bubble Burst");
-
         panel_01 = new JPanel();
         panel_01.setLayout(new GridBagLayout());
         panel_01.setBackground(Color.WHITE);
@@ -77,7 +76,7 @@ public class InitialFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 levelFinder();
                 JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
-                BubbleBurst bb = new BubbleBurst(level.getValue());
+                BubbleBurst bb = new BubbleBurst(numberOfBubbles, gameLevel);
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
                 bb.setVisible(true);
