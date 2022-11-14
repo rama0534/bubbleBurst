@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class MakeBubble {
     private int count;
     private int round = 0;
-    public void MakeBubble(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks, JLabel  statusbar, JPanel circlePanel){
+    public MakeBubble(MouseEvent e, Graphics g, ArrayList<Point> mouseClicks, JLabel  statusbar, JPanel circlePanel){
         if(e.getX() < 20 || e.getY() < 20 || e.getX() > 700 || e.getY() > 680){
             statusbar.setText("Radius less than 25 please click somewhere else.");
             JOptionPane.showMessageDialog( circlePanel,"Click 25 away from the boarder and existing bubble(s) to make a Bubble ", "Error", JOptionPane.ERROR_MESSAGE );
