@@ -45,9 +45,8 @@ public class SecondFrame extends JFrame{
     public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e, Graphics g){
         if(mouseClicks.size() < numberOfBubbles){
             MakeBubble makeBubble =  new MakeBubble(e,  g, mouseClicks, statusbar, circlePanel);
-//            makeBubble.MakeBubble(e,  g, mouseClicks, statusbar, circlePanel);
         }else {
-            BurstBubble(  g,  mouseClicks, burstedBubles, e );
+            BurstBubble burstBubble = new BurstBubble( g,  mouseClicks,  burstedBubles,  e );
         }
         if(burstedBubles.size() == numberOfBubbles){
             JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
@@ -56,8 +55,8 @@ public class SecondFrame extends JFrame{
     }
 
     private class Handlerclass implements MouseListener, MouseMotionListener {
-        ArrayList<Point> mouseClicks = new ArrayList<>();
 
+        ArrayList<Point> mouseClicks = new ArrayList<>();
         ArrayList<Point> burstBubbles = new ArrayList<>();
 
         public void mouseClicked(MouseEvent e) {
