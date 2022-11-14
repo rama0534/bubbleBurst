@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 
-public class BubbleBurst extends JFrame{
+public class SecondFrame extends JFrame{
     public JPanel circlePanel;
     private JLabel statusbar, statusbarBottom;
     private int numberOfBubbles;
@@ -16,7 +16,7 @@ public class BubbleBurst extends JFrame{
 
 
 
-    public BubbleBurst(int nOfB, String gameLevel){
+    public SecondFrame(int nOfB, String gameLevel){
         super("Bubble Burst");
         numberOfBubbles = nOfB;
         circlePanel = new JPanel();
