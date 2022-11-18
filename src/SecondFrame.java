@@ -14,8 +14,6 @@ public class SecondFrame extends JFrame{
     double pointLocation;
     int diameter = 50;
 
-
-
     public SecondFrame(int nOfB, String gameLevel){
         super("Bubble Burst");
         numberOfBubbles = nOfB;
@@ -38,7 +36,16 @@ public class SecondFrame extends JFrame{
             BurstBubble burstBubble = new BurstBubble( g,  mouseClicks,  burstedBubles,  e );
         }
         if(burstedBubles.size() == numberOfBubbles){
-            JOptionPane.showMessageDialog( circlePanel,"Game Finish", "Information", JOptionPane.INFORMATION_MESSAGE );
+            round++;
+            JOptionPane.showMessageDialog( circlePanel,"Round  "+round+" finished", "Information", JOptionPane.INFORMATION_MESSAGE );
+            System.out.println(mouseClicks);
+            System.out.println(burstedBubles);
+            mouseClicks.removeAll(mouseClicks);
+            burstedBubles.clear();
+            System.out.println(mouseClicks);
+            System.out.println(burstedBubles);
+
+
         }
 
     }
