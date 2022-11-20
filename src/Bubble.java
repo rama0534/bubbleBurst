@@ -1,10 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 public class Bubble extends JPanel {
     int x, y, diameter;

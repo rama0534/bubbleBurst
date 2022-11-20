@@ -14,6 +14,8 @@ public class InitialFrame extends JFrame{
     private JSlider level;
     private String gameLevel = "";
     private int numberOfBubbles = 4;
+    private int round = 1;
+    private int count = 15;
     GridBagConstraints c = new GridBagConstraints();
 
 
@@ -89,7 +91,7 @@ public class InitialFrame extends JFrame{
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog( start,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
-                SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel);
+                SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel, round, count);
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
                 bb.setVisible(true);
@@ -100,7 +102,7 @@ public class InitialFrame extends JFrame{
         restart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog( restart,gameLevel+ " level selected please make  "+numberOfBubbles+" bubbles by Click 25 away from the boarder and existing bubble(s) to make a Bubble", "Information", JOptionPane.INFORMATION_MESSAGE );
-                SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel);
+                SecondFrame bb = new SecondFrame(numberOfBubbles, gameLevel, round, count);
                 bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 bb.setSize(800, 800);
                 bb.setVisible(true);
