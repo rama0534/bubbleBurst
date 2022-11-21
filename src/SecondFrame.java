@@ -66,7 +66,7 @@ public class SecondFrame extends JFrame{
     public void Game(ArrayList<Point> mouseClicks, ArrayList<Point> burstedBubles, MouseEvent e, Graphics g){
 
         if(mouseClicks.size() < numberOfBubbles){
-            MakeBubble makeBubble =  new MakeBubble(e,  g, mouseClicks, statusbar, circlePanel);
+            MakeBubble makeBubble =  new MakeBubble(e,  g, mouseClicks, statusbar, circlePanel, round);
         }else {
             BurstBubble burstBubble = new BurstBubble( g,  mouseClicks,  burstedBubles,  e );
             if(mouseClicks.size() == numberOfBubbles){
